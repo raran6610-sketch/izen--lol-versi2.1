@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasil Key Grabber</title>
+    <style>
+        body { background: #0b0e14; color: #c9d1d9; font-family: monospace; padding: 20px; }
+        .container { max-width: 700px; margin: auto; }
+        .key-item { background: #161b22; padding: 12px; border-radius: 6px; margin: 8px 0; border-left: 4px solid #238636; }
+        .key-value { color: #ff7b72; word-break: break-all; }
+        .copy-btn { background: #238636; border: none; padding: 4px 12px; border-radius: 4px; color: white; cursor: pointer; }
+        .copy-btn:hover { background: #2ea043; }
+        .back-link { display: block; margin-top: 20px; color: #58a6ff; }
+        .meta { color: #8b949e; font-size: 14px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 Hasil Scan: {{ url }}</h2>
+        <div class="meta">⏱️ Waktu: {{ result.time }} detik | Status: {% if result.success %}✅ Berhasil{% else %}❌ Gagal{% endif %}</div>
+        {% if result.success %}
+            {% for key_type, values in result.keys.items() %}
+                <div class="key-item">
+                    <strong>📁 {{ key_type }}</strong>
+                    {% for val in values %}
+                        <div class="key-value">{{ val }}</div>
+                        <button class="copy-btn" onclick="copyToClipboard('{{ val }}')">📋 Copy</button>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>❌ Tidak ditemukan data atau terjadi error.</p>
+        {% endif %}
+        <a href="/" class="back-link">← Kembali</a>
+    </div>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Key disalin!');
+            }).catch(err => {
+                alert('❌ Gagal copy: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
