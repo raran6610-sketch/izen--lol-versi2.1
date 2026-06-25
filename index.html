@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Key Grabber Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #0b0e14; color: #c9d1d9; font-family: 'Courier New', monospace; padding: 30px; }
+        .box { max-width: 500px; margin: auto; background: #161b22; padding: 30px; border-radius: 12px; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; }
+        button { background: #238636; border: none; cursor: pointer; }
+        #countdown { font-size: 24px; font-weight: bold; color: #f0883e; }
+        .key-box { background: #0d1117; padding: 10px; border-radius: 6px; word-break: break-all; margin: 5px 0; border-left: 3px solid #238636; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>🔑 Key Grabber</h2>
+        <p>Masukkan URL target, otomatis ambil API key & konfigurasi.</p>
+        <form method="POST">
+            <input type="url" name="url" placeholder="https://target.com" required>
+            <button type="submit">▶ GRAB NOW</button>
+        </form>
+        <div id="countdown"></div>
+        <div id="result"></div>
+        <!-- Area untuk hasil key yang ditemukan -->
+        <div id="key-area" style="margin-top:20px;"></div>
+    </div>
+    <script>
+        // Timer & display key di bawah
+        document.querySelector('form').addEventListener('submit', function(e){
+            document.getElementById('countdown').innerHTML = '⏳ Memproses... 5 detik';
+            let count = 5;
+            const interval = setInterval(() => {
+                count--;
+                document.getElementById('countdown').innerHTML = `⏳ Memproses... ${count} detik`;
+                if (count <= 0) clearInterval(interval);
+            }, 1000);
+        });
+    </script>
+</body>
+          </html>
